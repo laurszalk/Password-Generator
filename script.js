@@ -2,12 +2,13 @@
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate"); //generate ID, which is the button
+var lowercase = "abcdefghijklmnopqrstuvwxyz";
+var Uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var numbers = "0123456789";
+var specialChars = "!@#$%^&*()";
 
-//1. prompt the user for password criteria
-
+//1. prompt the user for password length
 //what characters? uppercase, lowercase, numeric, special characters
-//var chars =
-//"0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 function generatePassword() {
   function askLength() {
@@ -26,21 +27,52 @@ function generatePassword() {
       } else {
         alert("Error. The number must be between 8 and 128.");
       }
-      passwordLength = prompt("Please enter a number between 8 and 128");
+      passwordLength = prompt("Please enter a number between 8 and 128.");
     }
     return passwordLength;
-  } //ask Length
+  }
   var passLength = askLength();
-  return passLength;
+  console.log(passLength);
 
-  function askLowercase() {}
+  var lowercaseChoice = confirm(
+    "Do you want to include lowercase letters in your pasword?"
+  );
+  var uppercaseChoice = confirm(
+    "Do you want to include uppercase letters in your pasword?"
+  );
+  var numberChoice = confirm("Do you want to include numbers in your pasword?"); //numberChoice
+  var charsChoice = confirm(
+    "Do you want to include special characters in your pasword?"
+  );
+  console.log(lowercaseChoice, uppercaseChoice, numberChoice, charsChoice);
+  possibleChoices = "";
+  if (lowercaseChoice === true) {
+    possibleChoices += lowercase;
+  }
+  if (uppercaseChoice === true) {
+    possibleChoices += Uppercase;
+  }
+  if (numberChoice === true) {
+    possibleChoices += numbers;
+  }
+  if (charsChoice === true) {
+    possibleChoices += specialChars;
+  }
+  console.log(possibleChoices);
+  var newPassword = "";
+  var newVariable = possibleChoices.split("");
+  console.log(newVariable);
+  for (var i = 0; i < passLength; i++) {
+    newPassword =
+      newPassword + newVariable[Math.floor(Math.random() * newVariable.length)];
+    console.log(newPassword);
+  }
+
+  return newPassword;
 }
-
-//password length between 8 and 128
 
 //2. validate the input
 //3. generate the password
-
 //4. display generated password on the page
 //return "Generated password will go here";
 
